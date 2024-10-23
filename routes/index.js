@@ -13,5 +13,4 @@ function routerApi(app){
   router.use('/users', usersRouter);
 }
 
-
 module.exports = routerApi;
