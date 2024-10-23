@@ -1,4 +1,5 @@
 const { faker } = require('@faker-js/faker');
+
 const boom = require('@hapi/boom');
 
 class ProductsService{
@@ -6,6 +7,7 @@ class ProductsService{
   constructor(){
     this.products = [];
     this.generate();
+
   }
 
   generate(){
@@ -71,7 +73,6 @@ async delete(id){
   this.products.splice(index, 1);
   return { id };
 }
-
 
 }
 

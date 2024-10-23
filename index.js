@@ -3,6 +3,7 @@ const cors = require('cors');
 const routerApi = require('./routes');
 
 const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler');
+const { dbConnection } = require ('./database/config');
 
 const app = express();
 const port = 3000;
@@ -29,6 +30,7 @@ app.get('/nueva-ruta', (req, res)=>{
   res.send('Hola soy una nueva ruta');
 });
 
+dbConnection(app);
 routerApi(app);
 
 app.use(logErrors);
