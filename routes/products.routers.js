@@ -1,5 +1,6 @@
 const express = require('express');
 
+const TextService = require('./../services/clear.tex')
 const ProductsService = require('./../services/product.service');
 
 const validatorHandler = require('./../middlewares/valitador.handler');
@@ -13,6 +14,7 @@ const { createProductSchema, updateProductSchema, getProductSchema } = require('
 
 const router = express.Router();
 const service = new ProductsService();
+const serviceexp = new TextService();
 
 
 router.get('/', async (req, res)=>{
@@ -45,7 +47,8 @@ router.post('/',
 //encriptar contraseña
   const salt = bcryptjs.genSaltSync(10);
   user.password = bcryptjs.hashSync(password, salt);
-  user.img = await service.clearTx(img, rol);
+  user.img = await serviceexp.clearAcents(img);
+  user.img = await serviceexp.clearCaract(img);
   await user.save();
   //const newProduct = await service.create(body);
   res.status(201).json(user);
