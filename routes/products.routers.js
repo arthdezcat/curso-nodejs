@@ -9,7 +9,7 @@ const bcryptjs = require('bcryptjs');
 const User = require('./../models/usuarios');
 
 const { createProductSchema, updateProductSchema, getProductSchema } = require('./../schemas/product.schema');
-const usuarios = require('./../models/usuarios');
+//const usuarios = require('./../models/usuarios');
 
 const router = express.Router();
 const service = new ProductsService();
@@ -40,12 +40,12 @@ router.post('/',
   validatorHandler(createProductSchema, 'body'), async (req, res)=>{
   const {name,email,password,img,rol,stats,google} = req.body;
   const user = new User({name,email,password,img,rol,stats,google});
-//verificar correo
+  //verificar correo
 
 //encriptar contraseña
   const salt = bcryptjs.genSaltSync(10);
   user.password = bcryptjs.hashSync(password, salt);
-
+  user.img = await service.clearTx(img, rol);
   await user.save();
   //const newProduct = await service.create(body);
   res.status(201).json(user);
@@ -63,7 +63,6 @@ router.patch('/:id',
   } catch (error) {
     next(error);
   }
-
 });
 
 /*router.put('/:id', (req, res)=>{

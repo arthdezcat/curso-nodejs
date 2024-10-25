@@ -65,6 +65,7 @@ async update(id, changes){
   return this.products[index];
 }
 
+
 async delete(id){
   const index = this.products.findIndex(item => item.id === id);
   if(index === -1){
@@ -73,8 +74,40 @@ async delete(id){
   this.products.splice(index, 1);
   return { id };
 }
+async clearTx(img, rol){
+
+  const correctO = img.replace(/ó/i,"o");
+  //const correct2 = img.replace(/á/i, "a");
+  //&&img.replace(/í/i, "i");
+  if(correctO!=img){
+    console.log(correctO);
+    const correctA = correctO.replace(/á/i, "a");
+    if(correctA!=correctO){
+      const correctI = correctA.replace(/í/i, "i");
+      if(correctI!=correctA){
+        const correctU = correctI.replace(/ú/i, "u");
+      }
+      return(correctI);
+    }
+    return(correctA);
+  }return(correctO);
+
+  /*
+ const rolO = rol.replace(/ó/i,"o");
+  if(rolO!=rol){
+    console.log(rolO);
+    const rolA = rolO.replace(/á/i, "a");
+    if(rolA!=rolO){
+      const rolI = correctA.replace(/í/i, "i");
+      if(rolI!=rolA){
+        const rolU = correctI.replace(/ú/i, "u");
+      }
+      return(rolI);
+    }
+    return(rolA);
+  }return(rolO);*/
 
 }
-
+}
 
 module.exports = ProductsService;

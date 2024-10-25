@@ -4,7 +4,7 @@ const id = Joi.string().uuid();
 const name = Joi.string().min(3).max(15);
 const email = Joi.string().min(10).max(50);
 const password = Joi.string().min(8).max(50);
-const img = Joi.string().uri();
+const img = Joi.string().min(5);
 const rol = Joi.string().min(9);
 const stats = Joi.boolean();
 const google = Joi.boolean();
@@ -21,6 +21,7 @@ const  createProductSchema = Joi.object({
   google: google.required()
   //image: image.require()
 });
+
 
 const  updateProductSchema = Joi.object({
   name: name,
